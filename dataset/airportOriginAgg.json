@@ -2,7 +2,7 @@
 	"name": "airportOriginAgg",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorageInput",
+			"referenceName": "demorgstorageadbSPN",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
