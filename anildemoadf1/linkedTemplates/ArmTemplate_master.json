@@ -1,0 +1,118 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "anildemoadf1"
+		},
+		"demorgstorageadbAccKey_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'demorgstorageadbAccKey'"
+		},
+		"demorgstorageadbSPN_servicePrincipalCredential": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalCredential' of 'demorgstorageadbSPN'"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://devi-key-vault.vault.azure.net/"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://weatherbit-v1-mashape.p.rapidapi.com/forecast/3hourly"
+		},
+		"demorgstorageadbAccKey_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://demorgstorageadb.dfs.core.windows.net/"
+		},
+		"demorgstorageadbSPN_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://demorgstorageadb.dfs.core.windows.net/"
+		},
+		"demorgstorageadbSPN_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "a2f63451-96e0-4fd4-84c5-49c56f2774ea"
+		},
+		"demorgstorageadbSPN_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "438d39c1-9cd6-4c1e-ac54-b34859c90b9d"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "anildemoadf1_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"demorgstorageadbAccKey_accountKey": {
+						"value": "[parameters('demorgstorageadbAccKey_accountKey')]"
+					},
+					"demorgstorageadbSPN_servicePrincipalCredential": {
+						"value": "[parameters('demorgstorageadbSPN_servicePrincipalCredential')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"RestService1_properties_typeProperties_url": {
+						"value": "[parameters('RestService1_properties_typeProperties_url')]"
+					},
+					"demorgstorageadbAccKey_properties_typeProperties_url": {
+						"value": "[parameters('demorgstorageadbAccKey_properties_typeProperties_url')]"
+					},
+					"demorgstorageadbSPN_properties_typeProperties_url": {
+						"value": "[parameters('demorgstorageadbSPN_properties_typeProperties_url')]"
+					},
+					"demorgstorageadbSPN_properties_typeProperties_tenant": {
+						"value": "[parameters('demorgstorageadbSPN_properties_typeProperties_tenant')]"
+					},
+					"demorgstorageadbSPN_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('demorgstorageadbSPN_properties_typeProperties_servicePrincipalId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "anildemoadf1_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'anildemoadf1_ArmTemplate_0')]"
+			]
+		}
+	]
+}

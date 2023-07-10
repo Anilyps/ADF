@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "anildemoadf1"
+		},
+		"demorgstorageadbAccKey_accountKey": {
+			"value": ""
+		},
+		"demorgstorageadbSPN_servicePrincipalCredential": {
+			"value": ""
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://devi-key-vault.vault.azure.net/"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://weatherbit-v1-mashape.p.rapidapi.com/forecast/3hourly"
+		},
+		"demorgstorageadbAccKey_properties_typeProperties_url": {
+			"value": "https://demorgstorageadb.dfs.core.windows.net/"
+		},
+		"demorgstorageadbSPN_properties_typeProperties_url": {
+			"value": "https://demorgstorageadb.dfs.core.windows.net/"
+		},
+		"demorgstorageadbSPN_properties_typeProperties_tenant": {
+			"value": "a2f63451-96e0-4fd4-84c5-49c56f2774ea"
+		},
+		"demorgstorageadbSPN_properties_typeProperties_servicePrincipalId": {
+			"value": "438d39c1-9cd6-4c1e-ac54-b34859c90b9d"
+		}
+	}
+}
