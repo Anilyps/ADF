@@ -2,7 +2,7 @@
 	"name": "Avro1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorageInput",
+			"referenceName": "demorgstorageadbSPN",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
