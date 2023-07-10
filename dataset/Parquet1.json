@@ -2,7 +2,7 @@
 	"name": "Parquet1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorageInput",
+			"referenceName": "demorgstorageadbAccKey",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
