@@ -1,0 +1,16 @@
+{
+	"name": "demorgstorageadbSPN",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://demorgstorageadb.dfs.core.windows.net/",
+			"azureCloudType": "AzurePublic",
+			"tenant": "a2f63451-96e0-4fd4-84c5-49c56f2774ea",
+			"servicePrincipalId": "438d39c1-9cd6-4c1e-ac54-b34859c90b9d",
+			"servicePrincipalCredentialType": "ServicePrincipalKey",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDQwNjI0NUQ3LTA3RTAtNDc3Qy1BMEVCLTY4MjUyNjI4MEZFN19kYjJiNjVjOS05YWQ3LTQzMGMtYmNhNy02MjcxMmM4Njk3NjUiDQp9"
+		}
+	}
+}

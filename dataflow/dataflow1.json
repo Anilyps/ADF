@@ -1,0 +1,66 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "csvAirport",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "airportAgg",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregate1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Date as date,",
+				"          Airport as string,",
+				"          Flight as string,",
+				"          Carrier as string,",
+				"          BusinessDI as string,",
+				"          AWBBoundID as string,",
+				"          Origin as string,",
+				"          Destination as string,",
+				"          CargoTypeCommoditygroup as string,",
+				"          CustomerCategory as string,",
+				"          VolumeTonnage as float",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('dynamicRange', 2,",
+				"          Origin,",
+				"          Destination,",
+				"          CustomerCategory",
+				"     )) ~> source1",
+				"source1 aggregate(groupBy(Origin,",
+				"          Destination,",
+				"          CustomerCategory),",
+				"     VolumeTonnage = sum(VolumeTonnage)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

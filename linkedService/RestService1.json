@@ -1,0 +1,31 @@
+{
+	"name": "RestService1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"lat": {
+				"type": "string"
+			},
+			"lon": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://weatherbit-v1-mashape.p.rapidapi.com/forecast/3hourly",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous",
+			"authHeaders": {
+				"X-RapidAPI-Key": {
+					"type": "SecureString",
+					"value": "**********"
+				},
+				"X-RapidAPI-Host": {
+					"type": "SecureString",
+					"value": "**********"
+				}
+			}
+		}
+	}
+}

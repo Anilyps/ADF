@@ -1,0 +1,74 @@
+{
+	"name": "dataflow_flowlet",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "csvAirport",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "airportOriginAgg",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "flowlet1",
+					"flowlet": {
+						"referenceName": "flowlet1",
+						"type": "DataFlowReference"
+					}
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Date as date,",
+				"          Airport as string,",
+				"          Flight as string,",
+				"          Carrier as string,",
+				"          BusinessDI as string,",
+				"          AWBBoundID as integer,",
+				"          Origin as string,",
+				"          Destination as string,",
+				"          CargoTypeCommoditygroup as string,",
+				"          CustomerCategory as string,",
+				"          VolumeTonnage as float",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 compose(mapColumn(",
+				"          trans_date = Date,",
+				"          Airport,",
+				"          Flight,",
+				"          Carrier,",
+				"          BusinessDI,",
+				"          AWBBoundID,",
+				"          Origin,",
+				"          Destination,",
+				"          CargoTypeCommoditygroup,",
+				"          CustomerCategory,",
+				"          VolumeTonnage",
+				"     ),",
+				"     composition: 'flowlet1') ~> flowlet1@(output1)",
+				"flowlet1@output1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

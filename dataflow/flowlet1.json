@@ -1,0 +1,42 @@
+{
+	"name": "flowlet1",
+	"properties": {
+		"type": "Flowlet",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "OriginAggVol"
+				},
+				{
+					"name": "input1"
+				},
+				{
+					"name": "output1"
+				}
+			],
+			"scriptLines": [
+				"input(output(",
+				"          trans_date as date,",
+				"          Airport as string,",
+				"          Flight as string,",
+				"          Carrier as string,",
+				"          BusinessDI as string,",
+				"          AWBBoundID as integer,",
+				"          Origin as string,",
+				"          Destination as string,",
+				"          CargoTypeCommoditygroup as string,",
+				"          CustomerCategory as string,",
+				"          VolumeTonnage as float",
+				"     ),",
+				"     order: 0,",
+				"     allowSchemaDrift: true) ~> input1",
+				"input1 aggregate(groupBy(trans_date,",
+				"          Origin),",
+				"     VolumeTonnage = sum(VolumeTonnage)) ~> OriginAggVol",
+				"OriginAggVol output() ~> output1"
+			]
+		}
+	}
+}
